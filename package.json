@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "lint": "eslint --ext .js .",
+    "fixlint": "eslint --fix --ext .js ."
   },
   "keywords": [],
   "author": "",
