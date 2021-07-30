@@ -5,10 +5,10 @@ const { MongoClient } = mongodb;
 let db;
 
 const connect = async (url, dbName) => {
-    const client = new MongoClient(url, { useUnifiedTopology: true });
-    await client.connect();
-    db =  client.db(dbName);
-}
+  const client = new MongoClient(url, { useUnifiedTopology: true });
+  await client.connect();
+  db = client.db(dbName);
+};
 
 const get = () => db;
 
