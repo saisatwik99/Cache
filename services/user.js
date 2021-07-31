@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import hasher from '../utils/hashing.js';
 import utils from '../utils/utils.js';
 import userDB from '../db/user.js';
+import InternalServerError from '../utils/errors/internalServerError.js';
 
 const userSignUp = async ({
   firstName, lastName, email, password, dob
@@ -19,7 +20,13 @@ const userSignUp = async ({
     salt
   };
 
-  return userDB.addUser(user);
+  const { insertedId } = await userDB.addUser(user);
+  const userId = insertedId.toString();
+  if (!insertedId) {
+    throw new InternalServerError('ID of User Not Found');
+  }
+
+  return utils.getToken(userId);
 };
 
 export default {

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import authController from '../controllers/auth.js';
-import validations from '../validations/auth.js';
+import authController from '../controllers/user.js';
+import validations from '../validations/user.js';
 
 const {
   signUpValidate,
