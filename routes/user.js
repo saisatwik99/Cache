@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import authController from '../controllers/user.js';
+import userController from '../controllers/user.js';
 import validations from '../validations/user.js';
 
 const {
@@ -10,6 +10,6 @@ const {
 
 const router = Router();
 
-router.post('/signUp', base64PwdSignup, signUpValidate, authController.userSignUp);
+router.post('/signUp', base64PwdSignup, signUpValidate, userController.userSignUp);
 
 export default router;
