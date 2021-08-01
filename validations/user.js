@@ -7,7 +7,7 @@ import utils from '../utils/utils.js';
 
 const {
   PASSWORDS_BASE64_CORRUPTED,
-  // LOGIN_VALIDATION_ERROR,
+  LOGIN_VALIDATION_ERROR,
   SIGNUP_VALIDATION_ERROR,
   // CHECKUSER_VALIDATION_ERROR,
   // UPDATEUSER_VALIDATION_ERROR,
@@ -50,16 +50,16 @@ const getAge = (birthDateString) => {
   return age;
 };
 
-// const logInSchema = Joi.object({
-//   email: Joi.string()
-//     .email({
-//       minDomainSegments: 2,
-//       tlds: { allow: true }
-//     })
-//     .pattern(emailRegex)
-//     .required(),
-//   password: password()
-// });
+const logInSchema = Joi.object({
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: true }
+    })
+    .pattern(emailRegex)
+    .required(),
+  password: password()
+});
 
 const signUpSchema = Joi.object({
   firstName: Joi.string().required().min(1).max(250),
@@ -95,7 +95,15 @@ const signUpValidate = ({ body }, res, next) => signUpSchema.validateAsync({
   .then(() => next())
   .catch((err) => next(new ValidationError(err.details, SIGNUP_VALIDATION_ERROR)));
 
+const loginValidate = ({ body }, res, next) => logInSchema.validateAsync({
+  ...body,
+  password: utils.base64toString(body.password)
+})
+  .then(() => next())
+  .catch((err) => next(new ValidationError(err.details[0].message, LOGIN_VALIDATION_ERROR)));
+
 export default {
   signUpValidate,
-  base64PwdSignup
+  base64PwdSignup,
+  loginValidate
 };

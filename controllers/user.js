@@ -23,6 +23,22 @@ const userSignUp = async (req, res, next) => {
   }
 };
 
+const userLogin = async (req, res, next) => {
+  try {
+    const {
+      body: {
+        email, password
+      }
+    } = req;
+    const token = await userService.userLogin({ email, password });
+
+    return responder(res)(null, { token });
+  } catch (ex) {
+    return next(ex);
+  }
+};
+
 export default {
-  userSignUp
+  userSignUp,
+  userLogin
 };
