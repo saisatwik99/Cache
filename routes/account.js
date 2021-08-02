@@ -2,11 +2,6 @@ import { Router } from 'express';
 
 import accountController from '../controllers/account.js';
 import utils from '../utils/utils.js';
-// import validations from '../validations/user.js';
-
-// const {
-//   verifyAuthToken
-// } = validations;
 
 const router = Router();
 
@@ -16,6 +11,5 @@ router.post('/getTransactions', utils.verifyAuthToken, accountController.getTran
 router.post('/sync', utils.verifyAuthToken, accountController.sync);
 
 router.use(utils.verifyAuthToken);
-// all other routes to be added below 
 
 export default router;
