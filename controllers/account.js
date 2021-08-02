@@ -52,7 +52,6 @@ const getAccountDetails = async (req, res, next) => {
 const getTransactions = async (req, res, next) => {
   try {
     const user = await userDb.getUserDetailsUsingId(req.userId);
-    console.log(user.email);
     const transactions = await accountDb.getAllTransactions({email: user.email})
     return responder(res)(null, {transactions});
   } catch (ex) {
@@ -76,7 +75,7 @@ const sync = async (req, res, next) => {
     await accountDb.addTransactions(transactions);
     const updatedTransactions = await accountDb.getAllTransactions({email: user.email});
     return responder(res)(null, {transactions: updatedTransactions, numOfTransactions: updatedTransactions.length});
-  } catch (er) {
+  } catch (ex) {
       return next(ex);
   }
 }
