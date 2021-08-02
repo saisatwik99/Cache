@@ -1,5 +1,6 @@
 import db from './db.js';
 import ConflictError from '../utils/errors/conflictError.js';
+import {ObjectId} from 'mongodb';
 
 const usersCollectionRef = () => db.get().collection('users');
 
@@ -16,6 +17,8 @@ const getUserDetails = ({email='', userId=''}) => {
   return null;
 };
 
+const getUserDetailsUsingId = (id) => usersCollectionRef().findOne({ _id: ObjectId(id) });
+
 const addUser = async (user) => {
   const isUserPresent = await usersCollectionRef().findOne({ email: user.email });
   if (isUserPresent) {
@@ -26,5 +29,6 @@ const addUser = async (user) => {
 
 export default {
   addUser,
-  getUserDetails
+  getUserDetails,
+  getUserDetailsUsingId
 };
