@@ -13,7 +13,7 @@ router.use(express.urlencoded({ limit: '20mb', extended: false }));
 router.get('/health', (req, res, next) => res.send('Up & running'));
 router.use('/user', user);
 
-router.use(utils.verifyAuthToken);
+// router.use(utils.verifyAuthToken);
 // other routes to be added
 
 router.use('/account', account);

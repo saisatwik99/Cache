@@ -5,9 +5,9 @@ import utils from '../utils/utils.js';
 
 const router = Router();
 
-router.post('/linkAccount', accountController.linkAccount);
-router.post('/getAccountDetails', accountController.getAccountDetails);
-router.post('/getTransactions', accountController.getTransactions);
-router.post('/sync', accountController.sync);
+router.post('/linkAccount', utils.verifyAuthToken, accountController.linkAccount);
+router.post('/getAccountDetails', utils.verifyAuthToken, accountController.getAccountDetails);
+router.post('/getTransactions', utils.verifyAuthToken, accountController.getTransactions);
+router.post('/sync', utils.verifyAuthToken, accountController.sync);
 
 export default router;

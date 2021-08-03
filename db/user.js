@@ -17,10 +17,6 @@ const getUserDetails = ({email='', userId=''}) => {
   return null;
 };
 
-const getUserDetailsUsingId = (id) => usersCollectionRef().findOne({ _id: ObjectId(id) });
-
-const getUserDetailsUsingId = (id) => usersCollectionRef().findOne({ _id: ObjectId(id) });
-
 const addUser = async (user) => {
   const isUserPresent = await usersCollectionRef().findOne({ email: user.email });
   if (isUserPresent) {
@@ -31,6 +27,5 @@ const addUser = async (user) => {
 
 export default {
   addUser,
-  getUserDetails,
-  getUserDetailsUsingId
+  getUserDetails
 };

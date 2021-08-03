@@ -16,9 +16,9 @@ const linkAccount = async (req, res, next) => {
         } = req;
         const user = req.user;
         const accountDetails = accountsUtil.generateBankAccount({
-            bankName, userName, password, userId: req.userId, email: user.email
+            bankName, userName, password, userId: user._id, email: user.email
         });
-
+        console.log("I am here");
         const transactions = accountsUtil.generateTransactions({
           email: accountDetails.uniqueUserId, 
           accountId: accountDetails.id,
@@ -27,11 +27,11 @@ const linkAccount = async (req, res, next) => {
           fromDate: '1/1/2021',
           toDate: '6/1/2021'
         });
-        Promise.all([
-          await accountDb.addAccount(accountDetails),
-          await accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance}),
-          await accountDb.addTransactions(transactions)
-        ]);
+        
+        await accountDb.addAccount(accountDetails),
+        await accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance}),
+        await accountDb.addTransactions(transactions)
+        
         const updatedAccountDetails = await accountDb.getAccountDetails({email: user.email});
         return responder(res)(null, {accountDetails: updatedAccountDetails, transactions: transactions.transactions, numOfTransactions: transactions.transactions.length});
 
@@ -72,10 +72,10 @@ const sync = async (req, res, next) => {
       fromDate: '6/2/2021',
       toDate: '8/2/2021'
     });
-    Promise.all([
-      accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance}),
-      accountDb.addTransactions(transactions)
-    ]);
+    
+    await accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance}),
+    await accountDb.addTransactions(transactions)
+    
     const updatedTransactions = await accountDb.getAllTransactions({email: user.email});
     return responder(res)(null, {transactions: updatedTransactions, numOfTransactions: updatedTransactions.length});
   } catch (ex) {
