@@ -3,7 +3,18 @@ import ConflictError from '../utils/errors/conflictError.js';
 
 const usersCollectionRef = () => db.get().collection('users');
 
-const getUserDetails = (email) => usersCollectionRef().findOne({ email });
+const getUserDetails = ({email='', userId=''}) => {
+  if (email === '' && userId !== '') {
+    return usersCollectionRef().findOne({ userId });
+  }
+  if (userId === '' && email !== '') {
+    return usersCollectionRef().findOne({ email });
+  }
+  if (userId !== '' && email !== '') {
+    return usersCollectionRef().findOne({ email, userId });
+  }
+  return null;
+};
 
 const addUser = async (user) => {
   const isUserPresent = await usersCollectionRef().findOne({ email: user.email });
