@@ -32,7 +32,7 @@ const userSignUp = async ({
 };
 
 const userLogin = async ({ email, password: inputPassword }) => {
-  const user = await userDB.getUserDetails(email);
+  const user = await userDB.getUserDetails({email});
   if (!user) {
     throw new NotFoundError('User Not Found')
   }
