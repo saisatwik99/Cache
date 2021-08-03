@@ -12,9 +12,10 @@ router.use(express.urlencoded({ limit: '20mb', extended: false }));
 // eslint-disable-next-line no-unused-vars
 router.get('/health', (req, res, next) => res.send('Up & running'));
 router.use('/user', user);
-router.use('/account', account);
 
 router.use(utils.verifyAuthToken);
 // other routes to be added
+
+router.use('/account', account);
 
 export default router;

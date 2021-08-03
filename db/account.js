@@ -12,7 +12,7 @@ const addAccount = async (account) => {
     return accountCollectionRef().insertOne(account);
 }
 
-const getAccountDetails = async ({email}) => accountCollectionRef().findOne({ uniqueUserId: email } );
+const getAccountDetails = ({email}) => accountCollectionRef().findOne({ uniqueUserId: email } );
 
 const updateAccountBalance = async (account) => {
     const isAccountPresent = await accountCollectionRef().findOne({ email: account.email });
@@ -22,11 +22,9 @@ const updateAccountBalance = async (account) => {
     return accountCollectionRef().updateOne({ email: account.email }, {$set: {balance: account.balance }});
 }
 
-const addTransactions = async (info) => {
-    return transactionsCollectionRef().insertMany(info.transactions);
-}
+const addTransactions = (info) => transactionsCollectionRef().insertMany(info.transactions);
 
-const getAllTransactions = async ({email}) => transactionsCollectionRef().find({ email } ).sort({date: -1}).toArray();
+const getAllTransactions = ({email}) => transactionsCollectionRef().find({ email } ).sort({date: -1}).toArray();
 
 export default {
     addAccount,

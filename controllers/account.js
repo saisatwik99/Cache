@@ -20,7 +20,6 @@ const linkAccount = async (req, res, next) => {
             bankName, userName, password, userId: req.userId, email: user.email
         });
 
-        const response = await accountDb.addAccount(accountDetails);
         const transactions = accountsUtil.generateTransactions({
           email: accountDetails.uniqueUserId, 
           accountId: accountDetails.id,
@@ -29,8 +28,11 @@ const linkAccount = async (req, res, next) => {
           fromDate: '1/1/2021',
           toDate: '6/1/2021'
         });
-        await accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance});
-        await accountDb.addTransactions(transactions);
+        Promise.all([
+          await accountDb.addAccount(accountDetails),
+          await accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance}),
+          await accountDb.addTransactions(transactions)
+        ]);
         const updatedAccountDetails = await accountDb.getAccountDetails({email: user.email});
         return responder(res)(null, {accountDetails: updatedAccountDetails, transactions: transactions.transactions, numOfTransactions: transactions.transactions.length});
 
