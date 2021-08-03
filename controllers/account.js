@@ -14,8 +14,7 @@ const linkAccount = async (req, res, next) => {
                 bankName, userName, password
             }
         } = req;
-        const user = await userDb.getUserDetailsUsingId(req.userId);
-
+        const user = req.user;
         const accountDetails = accountsUtil.generateBankAccount({
             bankName, userName, password, userId: req.userId, email: user.email
         });
@@ -43,7 +42,7 @@ const linkAccount = async (req, res, next) => {
 
 const getAccountDetails = async (req, res, next) => {
   try {
-    const user = await userDb.getUserDetailsUsingId(req.userId);
+    const user = req.user;
     const accountDetails = await accountDb.getAccountDetails({email: user.email});
     return responder(res)(null, {accountDetails});
   } catch (ex) {
@@ -53,7 +52,7 @@ const getAccountDetails = async (req, res, next) => {
 
 const getTransactions = async (req, res, next) => {
   try {
-    const user = await userDb.getUserDetailsUsingId(req.userId);
+    const user = req.user;
     const transactions = await accountDb.getAllTransactions({email: user.email})
     return responder(res)(null, {transactions});
   } catch (ex) {
@@ -63,7 +62,7 @@ const getTransactions = async (req, res, next) => {
 
 const sync = async (req, res, next) => {
   try {
-    const user = await userDb.getUserDetailsUsingId(req.userId);
+    const user = req.user;
     const accountDetails = await accountDb.getAccountDetails({email: user.email})
     const transactions = accountsUtil.generateTransactions({
       email: accountDetails.uniqueUserId, 
@@ -73,8 +72,10 @@ const sync = async (req, res, next) => {
       fromDate: '6/2/2021',
       toDate: '8/2/2021'
     });
-    await accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance});
-    await accountDb.addTransactions(transactions);
+    Promise.all([
+      accountDb.updateAccountBalance({email: accountDetails.email, balance: transactions.closeBalance}),
+      accountDb.addTransactions(transactions)
+    ]);
     const updatedTransactions = await accountDb.getAllTransactions({email: user.email});
     return responder(res)(null, {transactions: updatedTransactions, numOfTransactions: updatedTransactions.length});
   } catch (ex) {

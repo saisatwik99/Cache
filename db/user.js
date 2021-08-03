@@ -6,13 +6,13 @@ const usersCollectionRef = () => db.get().collection('users');
 
 const getUserDetails = ({email='', userId=''}) => {
   if (email === '' && userId !== '') {
-    return usersCollectionRef().findOne({ userId });
+    return usersCollectionRef().findOne({ _id: ObjectId(userId) });
   }
   if (userId === '' && email !== '') {
     return usersCollectionRef().findOne({ email });
   }
   if (userId !== '' && email !== '') {
-    return usersCollectionRef().findOne({ email, userId });
+    return usersCollectionRef().findOne({ email, _id: ObjectId(userId) });
   }
   return null;
 };
