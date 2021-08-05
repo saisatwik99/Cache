@@ -5,7 +5,7 @@ import userDB from '../db/user.js';
 
 const jwtConst = {
   issuer: 'fanta',
-  expiresIn: process.env.NODE_ENV === 'staging' ? '4d' : '20m'
+  expiresIn: process.env.NODE_ENV === 'staging' ? '4d' : '60m'
 };
 
 const envSecret = () => process.env.SECRET_KEY;
