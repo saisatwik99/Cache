@@ -1,5 +1,4 @@
 import express from 'express';
-import utils from '../utils/utils.js';
 
 import user from './user.js';
 import account from './account.js';

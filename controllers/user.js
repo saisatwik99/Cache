@@ -2,6 +2,8 @@ import responder from '../utils/responseHandler.js';
 import userService from '../services/user.js';
 import ValidationError from '../utils/errors/validationError.js';
 import httpErrors from '../utils/errors/constants.js';
+import utils from '../utils/utils.js';
+import InvalidJwtError from '../utils/errors/invalidToken.js';
 
 const userSignUp = async (req, res, next) => {
   try {
@@ -38,7 +40,17 @@ const userLogin = async (req, res, next) => {
   }
 };
 
+const isTokenValid = async (req, res, next) => {
+  try {
+    const decoded = utils.isTokenValid(req, res, next);
+    return responder(res)(null, { valid: true, tokenData: decoded });
+  } catch (error) {
+    return next(new InvalidJwtError('INVALID TOKEN'));
+  }
+}
+
 export default {
   userSignUp,
-  userLogin
+  userLogin,
+  isTokenValid
 };

@@ -14,6 +14,7 @@ const router = Router();
 
 router.post('/signUp', base64PwdSignup, signUpValidate, userController.userSignUp);
 router.post('/login', loginValidate, userController.userLogin);
+router.post('/validateToken', userController.isTokenValid);
 
 router.use(utils.verifyAuthToken);
 // all other routes to be added below 
