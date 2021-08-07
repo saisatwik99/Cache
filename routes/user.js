@@ -12,9 +12,16 @@ const {
 
 const router = Router();
 
+router.get('/signup', userController.getSignup);
 router.post('/signUp', base64PwdSignup, signUpValidate, userController.userSignUp);
+router.get('/login', userController.getLogin);
 router.post('/login', loginValidate, userController.userLogin);
+router.get('/dashboard', utils.verifyAuthToken, userController.dashboard);
+router.get('/bill-payments', utils.verifyAuthToken, userController.billPayments);
+router.get('/bill-payments/mobile', utils.verifyAuthToken, userController.billMobile);
+router.get('/accounts', utils.verifyAuthToken, userController.accounts);
 router.post('/validateToken', userController.isTokenValid);
+router.post('/logout', userController.logout);
 
 router.use(utils.verifyAuthToken);
 // all other routes to be added below 

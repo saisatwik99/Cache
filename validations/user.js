@@ -36,6 +36,7 @@ const password = (passField = 'password') => Joi.string()
   });
 
 const getAge = (birthDateString) => {
+  console.log(birthDateString);
   if (!birthDateString) {
     throw new InputParamError('Date of Birth Not Found');
   }

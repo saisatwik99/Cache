@@ -18,7 +18,6 @@ const linkAccount = async (req, res, next) => {
         const accountDetails = accountsUtil.generateBankAccount({
             bankName, userName, password, userId: user._id, email: user.email
         });
-        console.log("I am here");
         const transactions = accountsUtil.generateTransactions({
           email: accountDetails.uniqueUserId, 
           accountId: accountDetails.id,
@@ -33,18 +32,34 @@ const linkAccount = async (req, res, next) => {
         await accountDb.addTransactions(transactions)
         
         const updatedAccountDetails = await accountDb.getAccountDetails({email: user.email});
-        return responder(res)(null, {accountDetails: updatedAccountDetails, transactions: transactions.transactions, numOfTransactions: transactions.transactions.length});
+        res.redirect("/api/account/home")
+        // return responder(res)(null, {accountDetails: updatedAccountDetails, transactions: transactions.transactions, numOfTransactions: transactions.transactions.length});
 
     } catch (ex){
         return next(ex);
     }
 };
 
+const getLinkAccount = async (req, res, next) => {
+  try {
+    const user = req.user;
+    res.render('linkAccount', {user})
+  } catch (ex) {
+      return next(ex);
+  }
+}
+
 const getAccountDetails = async (req, res, next) => {
   try {
     const user = req.user;
     const accountDetails = await accountDb.getAccountDetails({email: user.email});
-    return responder(res)(null, {accountDetails});
+    const transactions = await accountDb.getAllTransactions({email: user.email});
+    
+    var exist = false;
+    if(accountDetails !== undefined) {
+      exist = true;
+    }
+    res.render('accounts', {account: accountDetails, transDetails: transactions, user, exist})
   } catch (ex) {
       return next(ex);
   }
@@ -54,7 +69,7 @@ const getTransactions = async (req, res, next) => {
   try {
     const user = req.user;
     const transactions = await accountDb.getAllTransactions({email: user.email})
-    return responder(res)(null, {transactions});
+    return responder(res)(null, transactions);
   } catch (ex) {
       return next(ex);
   }
@@ -87,5 +102,6 @@ export default {
   linkAccount,
   getAccountDetails,
   getTransactions,
-  sync
+  sync,
+  getLinkAccount
 };
