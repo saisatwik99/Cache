@@ -1,14 +1,11 @@
 import responder from '../utils/responseHandler.js';
-
 import goalService from '../services/goal.js'
 import goalUtils from '../utils/goal.js'
-
-import ConflictError from '../utils/errors/conflictError.js';
 
 const addGoal = async (req, res, next) => {
     try {
         const {
-            body : { targetamount , name , description ,timeperiod} 
+            body : { targetAmount , name , description ,timePeriod} 
         }= req;
         const user = req.user;
         let payments = [];
@@ -41,7 +38,7 @@ const addGoal = async (req, res, next) => {
 const updateGoal = async (req, res, next) => {
     try {
         const {
-            body : { goalId,targetamount , name , description ,} 
+            body : { goalId,targetAmount , name , description ,timePeriod} 
         }= req;
         const user = req.user
         const goal = {
@@ -49,12 +46,12 @@ const updateGoal = async (req, res, next) => {
             targetamount,
             name,
             description,
+            timePeriod,
             userId:user._id
         }
         await goalService.updateGoal(goal)
 
         return responder(res)(null, {goal:goal})
-
     }
     catch (err) {
        return next(err);

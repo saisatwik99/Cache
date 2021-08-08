@@ -1,6 +1,4 @@
 import axios from "axios";
-import goalsDb from "../db/goals.js";
-
 
 const getTotalNav = async () =>{
     let tnav = 0;
@@ -11,9 +9,9 @@ const getTotalNav = async () =>{
         }
         }
     )
+    .catch(err => {console.log(err); tnav = 0; })
     return tnav;
 }
-
 
 export default {
     getTotalNav
