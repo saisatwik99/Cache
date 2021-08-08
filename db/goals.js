@@ -14,7 +14,11 @@ const updateGoal = (goal) => {
     if(goal.targetamount === '' && goal.name === '' && goal.description === '') {
         return ConflictError("Update Failed")
     }
-    return goalsCollectionRef().findOneAndUpdate({_id: goal._id},{ $set : {targetamount: goal.targetamount, description: goal.description,name: goal.name}})
+    return goalsCollectionRef().findOneAndUpdate(
+        {_id: goal._id},
+        { $set : {targetamount: goal.targetamount, description: goal.description,name: goal.name}}, 
+        {returnNewDocument: true}
+    )
 }
 
 export default {

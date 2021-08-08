@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import goalsController from '../controllers/goals.js';
 import utils from '../utils/utils.js';
 
