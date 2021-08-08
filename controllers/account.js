@@ -98,10 +98,15 @@ const sync = async (req, res, next) => {
   }
 }
 
+const goalsHome = (req, res) => {
+  res.render("goalHome");
+}
+
 export default {
   linkAccount,
   getAccountDetails,
   getTransactions,
   sync,
-  getLinkAccount
+  getLinkAccount,
+  goalsHome
 };

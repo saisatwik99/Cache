@@ -349,9 +349,9 @@
                                                                     <div class="pb-5" data-wizard-type="step-content">
                                                                         <h4 class="mb-10 font-weight-bold text-dark">Enter your Bank Details</h4>
                                                                         <!--begin::Input-->
-                                                                        <div class="form-group">
+                                                                        <div class="form-group validation">
                                                                             <label>Bank Name</label>
-                                                                            <select name="bankName" class="form-control form-control-solid form-control-lg">
+                                                                            <select name="bankName" class="form-control form-control-solid form-control-lg" required>
                                                                                 <option value="State Bank of India">State Bank of India</option>
                                                                                 <option value="HDFC Bank" selected="selected">HDFC Bank</option>
                                                                                 <option value="Kotak Mahindra">Kotak Mahindra</option>
@@ -361,14 +361,14 @@
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label>User Name</label>
-                                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="username" placeholder="Username" />
+                                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="username" placeholder="Username" required/>
                                                                             <span class="form-text text-muted">Please enter your account username.</span>
                                                                         </div>
                                                                         <!--end::Input-->
                                                                         <!--begin::Input-->
                                                                         <div class="form-group">
                                                                             <label>Password</label>
-                                                                            <input type="password" class="form-control form-control-solid form-control-lg" name="password" placeholder="Password"  />
+                                                                            <input type="password" class="form-control form-control-solid form-control-lg" name="password" placeholder="Password"  required/>
                                                                             <span class="form-text text-muted">Please enter your account password</span>
                                                                         </div>
                                                                         
@@ -382,7 +382,7 @@
                                                                         <!--begin::Select-->
                                                                         <div class="form-group">
                                                                             <label>One Time Password</label>
-                                                                            <input type="password" class="form-control form-control-solid form-control-lg" name="password" placeholder="Password"  />
+                                                                            <input type="password" class="form-control form-control-solid form-control-lg" name="otp" placeholder="Password"  />
                                                                             <span class="form-text text-muted">Please enter your 6 digits otp you received</span>
                                                                         </div>
                                                                     </div>
@@ -496,6 +496,7 @@
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="/assets/js/pages/custom/contacts/list-datatable.js"></script>
         <script src="/assets/js/pages/custom/wizard/wizard-1.js"></script>
+		<script src="assets/js/pages/crud/forms/validation/form-controls.js"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

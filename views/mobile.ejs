@@ -91,8 +91,8 @@
 						<!--begin::Nav-->
 						<ul class="nav flex-column">
 							<!--begin::Item-->
-							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Latest Projects">
-								<a href="#" class="nav-link btn btn-icon btn-lg btn-borderless active">
+							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Dashboard">
+								<a href="/api/user/dashboard" class="nav-link btn btn-icon btn-lg btn-borderless">
 									<span class="svg-icon svg-icon-xxl">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -108,8 +108,8 @@
 							</li>
 							<!--end::Item-->
 							<!--begin::Item-->
-							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Metronic Features">
-								<a href="#" class="nav-link btn btn-icon btn-lg btn-borderless" data-toggle="tab" data-target="#kt_aside_tab_2" role="tab">
+							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Accounts">
+								<a href="/api/account/home" class="nav-link btn btn-icon btn-lg btn-borderless">
 									<span class="svg-icon svg-icon-xxl">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -125,8 +125,8 @@
 							</li>
 							<!--end::Item-->
 							<!--begin::Item-->
-							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Latest Reports">
-								<a href="#" class="nav-link btn btn-icon btn-lg btn-borderless" data-toggle="tab" data-target="#kt_aside_tab_3" role="tab">
+							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Bill Payments">
+								<a href="/api/user/bill-payments" class="nav-link btn btn-icon btn-lg btn-borderless">
 									<span class="svg-icon svg-icon-xxl">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -307,7 +307,7 @@
                                                                         <!--begin::Select-->
                                                                         <div class="form-group">
                                                                             <label>Mobile Number</label>
-                                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="username" placeholder="Mobile Number" />
+                                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="mobilenumber" placeholder="Mobile Number" required/>
                                                                             <span class="form-text text-muted">Please enter your mobile number.</span>
                                                                         </div>
                                                                         <div class="form-group">
@@ -338,11 +338,15 @@
                                                                     <!--end::Wizard Step 5-->
                                                                     <!--begin::Wizard Actions-->
                                                                     <div class="d-flex justify-content-between border-top mt-5 pt-10">
-                                                                        
-                                                                            
-																		<form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_HiFK6Hw3N66Ybv" async> </script> </form> 
-																			<!-- <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button> -->
-                                                                        
+                                                                        <form>
+																			<script 
+																				src="https://checkout.razorpay.com/v1/payment-button.js" 
+																				data-payment_button_id="pl_HiDYCitKwPSWR3"
+																				data-button_text = "Pay Now"
+																				data-button_theme = "brand-color"
+																			> 
+																			</script> 
+																		</form>
                                                                     </div>
                                                                     <!--end::Wizard Actions-->
                                                                 </form>

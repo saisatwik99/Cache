@@ -24,7 +24,7 @@ const userSignUp = async (req, res, next) => {
       firstName, lastName, email, password, dob
     });
     req.session.authtoken = token;
-    return responder(res)(null, { token });
+    res.redirect("/api/user/dashboard");
   } catch (ex) {
     return next(ex);
   }
