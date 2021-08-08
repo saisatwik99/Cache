@@ -5,7 +5,7 @@ const accountCollectionRef = () => db.get().collection('accounts');
 const transactionsCollectionRef = () => db.get().collection('transactions');
 
 const addAccount = async (account) => {
-    const isAccountPresent = await accountCollectionRef().findOne({ email: account.email });
+    const isAccountPresent = await accountCollectionRef().findOne({ email: account.uniqueUserId });
     if (isAccountPresent){
         throw new ConflictError('Account Already exists');
     }

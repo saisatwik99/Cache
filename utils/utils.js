@@ -20,7 +20,8 @@ const isTokenValid = (req, res, next) => {
 };
 
 const verifyAuthToken = async (req, res, next) => {
-  const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || '';
+  const token = req.session.authtoken;
+  if(!token) {return res.redirect('/api/user/login')};
   try {
     const isVerified = jwt.verify(token, envSecret(), jwtConst);
 

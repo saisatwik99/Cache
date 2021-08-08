@@ -6,8 +6,10 @@ import utils from '../utils/utils.js';
 const router = Router();
 
 router.post('/linkAccount', utils.verifyAuthToken, accountController.linkAccount);
-router.post('/getAccountDetails', utils.verifyAuthToken, accountController.getAccountDetails);
-router.post('/getTransactions', utils.verifyAuthToken, accountController.getTransactions);
+router.get('/linkAccount', utils.verifyAuthToken, accountController.getLinkAccount);
+router.get('/home', utils.verifyAuthToken, accountController.getAccountDetails);
+router.get('/getTransactions', utils.verifyAuthToken, accountController.getTransactions);
 router.post('/sync', utils.verifyAuthToken, accountController.sync);
+router.get('/goals/home', utils.verifyAuthToken, accountController.goalsHome);
 
 export default router;
