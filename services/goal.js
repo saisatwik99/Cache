@@ -5,9 +5,8 @@ const addGoal = async (goal) => {
     return goal;
 }
 
-const updateGoal = async (goal) => {
-    await goalsDb.updateGoal(goal);
-    return goal;
+const updateGoal = (goal) => {
+   return goalsDb.updateGoal(goal);
 }
 
 export default {

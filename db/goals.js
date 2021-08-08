@@ -1,5 +1,6 @@
 import db from './db.js';
 import ConflictError from '../utils/errors/conflictError.js';
+import { ObjectId } from 'mongodb';
 
 const goalsCollectionRef = () => db.get().collection('goals')
 
@@ -10,12 +11,12 @@ const addGoal = (goal) => {
     return goalsCollectionRef().insertOne(goal);
 }
 
-const updateGoal = (goal) => {
+const updateGoal = async (goal) => {
     if(goal.targetamount === '' && goal.name === '' && goal.description === '') {
         return ConflictError("Update Failed")
     }
     return goalsCollectionRef().findOneAndUpdate(
-        {_id: goal._id},
+        {_id: ObjectId(goal.goalId)},
         { $set : {targetamount: goal.targetamount, description: goal.description,name: goal.name}}, 
         {returnNewDocument: true}
     )

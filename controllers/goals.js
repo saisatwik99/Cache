@@ -1,15 +1,11 @@
 import responder from '../utils/responseHandler.js';
 import goalService from '../services/goal.js';
 import goalUtils from '../utils/goal.js';
-import goalSchema from '../validations/goal.js';
-import validateError from '../utils/errors/validationError.js';
 
 const addGoal = async (req, res, next) => {
     try {
-        const {
-            body : { targetAmount , name , description ,timePeriod} 
-        }= req;
-
+   
+        const {name , targetAmount ,description , timePeriod} = req.body;
         const user = req.user;
         let payments = [];
 
