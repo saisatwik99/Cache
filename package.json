@@ -16,6 +16,7 @@
     "@babel/core": "^7.14.8",
     "@babel/eslint-parser": "^7.14.7",
     "@hapi/joi": "^17.1.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "connect-mongodb-session": "^3.0.0",
     "crypto": "^1.0.1",

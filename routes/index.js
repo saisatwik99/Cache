@@ -2,6 +2,7 @@ import express from 'express';
 
 import user from './user.js';
 import account from './account.js';
+import goals from './goals.js';
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/user', user);
 // other routes to be added
 
 router.use('/account', account);
+router.use('/goals', goals);
 
 export default router;
