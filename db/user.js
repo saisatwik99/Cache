@@ -1,10 +1,10 @@
+import { ObjectId } from 'mongodb';
 import db from './db.js';
 import ConflictError from '../utils/errors/conflictError.js';
-import {ObjectId} from 'mongodb';
 
 const usersCollectionRef = () => db.get().collection('users');
 
-const getUserDetails = ({email='', userId=''}) => {
+const getUserDetails = ({ email = '', userId = '' }) => {
   if (email === '' && userId !== '') {
     return usersCollectionRef().findOne({ _id: ObjectId(userId) });
   }

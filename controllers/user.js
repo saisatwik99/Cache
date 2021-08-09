@@ -4,6 +4,7 @@ import ValidationError from '../utils/errors/validationError.js';
 import httpErrors from '../utils/errors/constants.js';
 import utils from '../utils/utils.js';
 import InvalidJwtError from '../utils/errors/invalidToken.js';
+import userDB from '../db/user.js';
 
 const getSignup = (req, res) => res.render('signup');
 
@@ -43,14 +44,16 @@ const userLogin = async (req, res, next) => {
     const token = await userService.userLogin({ email, password });
     req.session.authtoken = token;
     console.log(token);
-    return res.redirect('/api/user/dashboard');
+    res.redirect('/api/user/dashboard');
   } catch (ex) {
     return next(ex);
   }
 };
 
-const dashboard = (req, res) => {
-  res.render('dashboard');
+const dashboard = async (req, res) => {
+  const { user } = req;
+  const userDetails = await userDB.getUserDetails({ email: user.email });
+  res.render('dashboard', { user: userDetails });
 };
 
 const billPayments = (req, res) => {

@@ -25,7 +25,7 @@ function randomDate(date1, date2){
 
 const generateBankAccount = (req) => {
     const {
-        bankName, userName , password, userId, email
+        bankName, userName , password, userId, email, imgUrl
     } = req;
     const generateBalance = 20000 + Math.floor(Math.random() * 20000);
     return {
@@ -37,7 +37,8 @@ const generateBankAccount = (req) => {
         "name": bankName,
         "balance": generateBalance,
         "uniqueUserId": email,
-        "userRef": userId
+        "userRef": userId,
+        "imgUrl": imgUrl
     }
 }
 

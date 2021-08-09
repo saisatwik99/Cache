@@ -32,12 +32,12 @@ const userSignUp = async ({
 };
 
 const userLogin = async ({ email, password: inputPassword }) => {
-  const user = await userDB.getUserDetails({email});
+  const user = await userDB.getUserDetails({ email });
   if (!user) {
-    throw new NotFoundError('User Not Found')
+    throw new NotFoundError('User Not Found');
   }
   if (!hasher.verify(utils.base64toString(inputPassword), user.password, user.salt)) {
-    throw new AuthError()
+    throw new AuthError();
   }
 
   return utils.getToken(user._id);
