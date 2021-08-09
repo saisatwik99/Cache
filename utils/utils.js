@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-import InvalidJwtError from '../utils/errors/invalidToken.js';
 import userDB from '../db/user.js';
 
 const jwtConst = {
@@ -14,17 +13,19 @@ const base64toString = (b64) => Buffer.from(b64, 'base64').toString();
 
 const getToken = (id) => jwt.sign({ id }, envSecret(), jwtConst);
 
+// eslint-disable-next-line no-unused-vars
 const isTokenValid = (req, res, next) => {
-    const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || '';
-    return jwt.verify(token, envSecret(), jwtConst);
+  const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || '';
+  return jwt.verify(token, envSecret(), jwtConst);
 };
 
 const verifyAuthToken = async (req, res, next) => {
   const token = req.session.authtoken;
-  // const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || '';
-  if(!token) {return res.redirect('/api/user/login')};
+  if (!token) {
+    return res.redirect('/api/user/login');
+  }
   try {
-    const isVerified = jwt.verify(token, envSecret(), jwtConst);
+    jwt.verify(token, envSecret(), jwtConst);
 
     const data = jwt.decode(token, jwtConst);
     const user = await userDB.getUserDetails({ userId: data.id });
@@ -32,8 +33,7 @@ const verifyAuthToken = async (req, res, next) => {
 
     return next();
   } catch (err) {
-    res.redirect('/api/user/login');
-    // return next(new InvalidJwtError('Invalid Token'));
+    return res.redirect('/api/user/login');
   }
 };
 
