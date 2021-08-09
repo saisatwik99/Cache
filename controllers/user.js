@@ -31,6 +31,7 @@ const userSignUp = async (req, res, next) => {
 };
 
 const getLogin = (req, res) => {
+  console.log("Why I am here");
   res.render('login');
 }
 

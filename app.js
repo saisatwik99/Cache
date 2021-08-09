@@ -4,7 +4,6 @@ import morgan from 'morgan';
 import session from 'express-session';
 import mongoDBStore from 'connect-mongodb-session';
 import methodOverride from 'method-override';
-import bodyParser from 'body-parser';
 
 import MongoDb from './db/db.js';
 import routes from './routes/index.js';

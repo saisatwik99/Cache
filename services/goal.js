@@ -9,7 +9,12 @@ const updateGoal = (goal) => {
    return goalsDb.updateGoal(goal);
 }
 
+const getAllGoals = (user) => {
+    return goalsDb.getAllGoals(user);
+}
+
 export default {
     addGoal,
-    updateGoal
+    updateGoal,
+    getAllGoals
 }

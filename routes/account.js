@@ -10,6 +10,5 @@ router.get('/linkAccount', utils.verifyAuthToken, accountController.getLinkAccou
 router.get('/home', utils.verifyAuthToken, accountController.getAccountDetails);
 router.get('/getTransactions', utils.verifyAuthToken, accountController.getTransactions);
 router.post('/sync', utils.verifyAuthToken, accountController.sync);
-router.get('/goals/home', utils.verifyAuthToken, accountController.goalsHome);
 
 export default router;

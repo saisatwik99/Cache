@@ -5,7 +5,7 @@ import ValidationError from '../utils/errors/validationError.js';
 const { VALIDATION_ERROR }= httpErrors;
 const goalSchema= Joi.object({
     name: Joi.string().required(),
-    description: Joi.string().min(1).max(250).optional(),
+    description: Joi.string().min(10).max(250).optional(),
     timePeriod: Joi.number().required().min(1).max(100),
     targetAmount: Joi.number().required()
 });

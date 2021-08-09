@@ -11,7 +11,9 @@ const addGoal = (goal) => {
     return goalsCollectionRef().insertOne(goal);
 }
 
-const updateGoal = async (goal) => {
+const findGoal = async (goalID) => goalsCollectionRef().findOne({ _id: ObjectId(goalID) });
+
+const updateGoal = (goal) => {
     if(goal.targetamount === '' && goal.name === '' && goal.description === '') {
         return ConflictError("Update Failed")
     }
@@ -22,7 +24,24 @@ const updateGoal = async (goal) => {
     )
 }
 
+const updateCompleteGoal = (goal) => goalsCollectionRef().findOneAndUpdate(
+        {_id: ObjectId(goal._id)},
+        { $set : {totalNav: goal.totalNav, payments: goal.payments}}, 
+        {returnNewDocument: true}
+    )
+
+
+const getAllGoals = (user) => {
+    return goalsCollectionRef().find({ userId: ObjectId(user._id) }).toArray();
+}
+
+const deleteGoal = (goalId) => goalsCollectionRef().findOneAndDelete({_id: ObjectId(goalId)})
+
 export default {
     addGoal,
-    updateGoal
+    updateGoal,
+    getAllGoals,
+    findGoal,
+    updateCompleteGoal,
+    deleteGoal
 }

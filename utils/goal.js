@@ -1,18 +1,18 @@
-import axios from "axios";
+import got from "got";
 
-const getTotalNav = async () =>{
-    let tnav = 0;
-    await axios.get(`https://api.mfapi.in/mf/147888`)
-    .then(data =>{
-        if(data.status === 200) {
-            tnav = parseFloat(data.data.data[0].nav)
-        }
-        }
-    )
-    .catch(err => {console.log(err); tnav = 0; })
-    return tnav;
+const getTotalNavValue = async (totalNav) => {
+    const response = await got(`https://api.mfapi.in/mf/147888`);
+    const data = await JSON.parse(response.body);
+    return totalNav*data.data[0].nav;
+}
+
+const getNavValue = async () => {
+    const response = await got(`https://api.mfapi.in/mf/147888`);
+    const data = await JSON.parse(response.body);
+    return data.data[0].nav;
 }
 
 export default {
-    getTotalNav
+    getTotalNavValue,
+    getNavValue
 }

@@ -57,6 +57,28 @@ var KTWizard4 = function () {
 
 		// Submit event
 		_wizardObj.on('submit', function (wizard) {
+			if (validator) {
+				validator.validate().then(function (status) {
+					if (status == 'Valid') {
+						wizard.goTo(wizard.getNewStep());
+
+						KTUtil.scrollTop();
+					} else {
+						Swal.fire({
+							text: "Sorry, looks like there are some errors detected, please try again.",
+							icon: "error",
+							buttonsStyling: false,
+							confirmButtonText: "Ok, got it!",
+							customClass: {
+								confirmButton: "btn font-weight-bold btn-light"
+							}
+						}).then(function () {
+							KTUtil.scrollTop();
+						});
+					}
+				});
+			}
+
 			Swal.fire({
 				text: "All is good! Please confirm the form submission.",
 				icon: "success",
@@ -93,34 +115,31 @@ var KTWizard4 = function () {
 			_formEl,
 			{
 				fields: {
-					fname: {
+					name: {
 						validators: {
 							notEmpty: {
-								message: 'First name is required'
+								message: 'Goal name is required'
 							}
 						}
 					},
-					lname: {
+					description: {
 						validators: {
 							notEmpty: {
-								message: 'Last Name is required'
+								message: 'Goal Description is required'
 							}
 						}
 					},
-					phone: {
+					targetAmount: {
 						validators: {
 							notEmpty: {
-								message: 'Phone is required'
+								message: 'Target Amount is required'
 							}
 						}
 					},
-					email: {
+					timePeriod: {
 						validators: {
 							notEmpty: {
-								message: 'Email is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'Time Period is required'
 							}
 						}
 					}
@@ -136,115 +155,6 @@ var KTWizard4 = function () {
 			}
 		));
 
-		// Step 2
-		_validations.push(FormValidation.formValidation(
-			_formEl,
-			{
-				fields: {
-					address1: {
-						validators: {
-							notEmpty: {
-								message: 'Address is required'
-							}
-						}
-					},
-					postcode: {
-						validators: {
-							notEmpty: {
-								message: 'Postcode is required'
-							}
-						}
-					},
-					city: {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					state: {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					country: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
-							}
-						}
-					}
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					// Bootstrap Framework Integration
-					bootstrap: new FormValidation.plugins.Bootstrap({
-						//eleInvalidClass: '',
-						eleValidClass: '',
-					})
-				}
-			}
-		));
-
-		// Step 3
-		_validations.push(FormValidation.formValidation(
-			_formEl,
-			{
-				fields: {
-					ccname: {
-						validators: {
-							notEmpty: {
-								message: 'Credit card name is required'
-							}
-						}
-					},
-					ccnumber: {
-						validators: {
-							notEmpty: {
-								message: 'Credit card number is required'
-							},
-							creditCard: {
-								message: 'The credit card number is not valid'
-							}
-						}
-					},
-					ccmonth: {
-						validators: {
-							notEmpty: {
-								message: 'Credit card month is required'
-							}
-						}
-					},
-					ccyear: {
-						validators: {
-							notEmpty: {
-								message: 'Credit card year is required'
-							}
-						}
-					},
-					cccvv: {
-						validators: {
-							notEmpty: {
-								message: 'Credit card CVV is required'
-							},
-							digits: {
-								message: 'The CVV value is not valid. Only numbers is allowed'
-							}
-						}
-					}
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					// Bootstrap Framework Integration
-					bootstrap: new FormValidation.plugins.Bootstrap({
-						//eleInvalidClass: '',
-						eleValidClass: '',
-					})
-				}
-			}
-		));
 	}
 
 	return {

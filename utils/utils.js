@@ -21,6 +21,7 @@ const isTokenValid = (req, res, next) => {
 
 const verifyAuthToken = async (req, res, next) => {
   const token = req.session.authtoken;
+  // const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || '';
   if(!token) {return res.redirect('/api/user/login')};
   try {
     const isVerified = jwt.verify(token, envSecret(), jwtConst);
@@ -31,7 +32,8 @@ const verifyAuthToken = async (req, res, next) => {
 
     return next();
   } catch (err) {
-    return next(new InvalidJwtError('Invalid Token'));
+    res.redirect('/api/user/login');
+    // return next(new InvalidJwtError('Invalid Token'));
   }
 };
 

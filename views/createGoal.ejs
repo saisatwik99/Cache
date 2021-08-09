@@ -4,7 +4,7 @@
 	<!--begin::Head-->
 	<head><base href="">
 		<meta charset="utf-8" />
-		<title>Mobile Recharge</title>
+		<title>Create a Goal</title>
 		<meta name="description" content="Updates and statistics" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -21,8 +21,9 @@
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
+        <!--begin::Page Custom Styles(used by this page)-->
+		<!--end::Page Custom Styles-->
 		<link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
-        <link href="/assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -109,7 +110,7 @@
 							<!--end::Item-->
 							<!--begin::Item-->
 							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Accounts">
-								<a href="/api/account/home" class="nav-link btn btn-icon btn-lg btn-borderless">
+								<a href="/api/account/home" class="nav-link btn btn-icon btn-lg btn-borderless active" data-toggle="tab" data-target="#kt_aside_tab_2" role="tab">
 									<span class="svg-icon svg-icon-xxl">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -126,7 +127,7 @@
 							<!--end::Item-->
 							<!--begin::Item-->
 							<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Bill Payments">
-								<a href="/api/user/bill-payments" class="nav-link btn btn-icon btn-lg btn-borderless">
+								<a href="/api/user/bill-payments" class="nav-link btn btn-icon btn-lg btn-borderless" >
 									<span class="svg-icon svg-icon-xxl">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -237,7 +238,7 @@
 										<ul class="menu-nav">
 											<li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here" data-menu-toggle="click" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
-													<span class="menu-text">Mobile Recharge</span>
+													<span class="menu-text">Goals</span>
 													<i class="menu-arrow"></i>
 												</a>
 											</li>
@@ -249,7 +250,6 @@
 								<!--end::Menu Wrapper-->
 								<!--begin::Toolbar-->
 								
-								
 								<!--end::Toolbar-->
 							</div>
 							<!--end::Container-->
@@ -259,106 +259,90 @@
 					<!--end::Header-->
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						
+						<!--end::Subheader-->
 						<!--begin::Entry-->
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
-							<div class="container">
-								<!--begin::Dashboard-->
-								<!--begin::Row-->
-								<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                                    <!--begin::Subheader-->
-                                    <div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
-                                        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-                                            <!--begin::Info-->
-                                            <div class="d-flex align-items-center flex-wrap mr-1">
-                                                <!--begin::Page Heading-->
-                                                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                                                    <!--begin::Page Title-->
-                                                    <h5 class="text-dark font-weight-bold my-1 mr-5">Mobile Recharge</h5>
-                                                    <!--end::Page Title-->
-                                                    
-                                                </div>
-                                                <!--end::Page Heading-->
-                                            </div>
-                                            <!--end::Info-->
-                                           
-                                        </div>
-                                    </div>
-                                    <!--end::Subheader-->
-                                    <!--begin::Entry-->
-                                    <div class="d-flex flex-column-fluid">
-                                        <!--begin::Container-->
-                                        <div class="container-fluid">
-                                            <div class="card card-custom">
-                                                <div class="card-body p-0">
-                                                    <!--begin::Wizard-->
-                                                    <div class="wizard wizard-1" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="false">
-                                                        
-                                                        <!--begin::Wizard Body-->
-                                                        <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
-                                                            <div class="col-xl-12 col-xxl-7">
-                                                                <!--begin::Wizard Form-->
-                                                                <form action="/api/account/linkAccount" method="POST" class="form" id="kt_form">
-                                                                                                                                      
-                                                                   
-                                                                    <!--begin::Wizard Step 5-->
-                                                                    <div class="pb-5" data-wizard-type="step-content">
-                                                                        
-                                                                        <!--begin::Select-->
-                                                                        <div class="form-group">
-                                                                            <label>Mobile Number</label>
-                                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="mobilenumber" placeholder="Mobile Number" required/>
-                                                                            <span class="form-text text-muted">Please enter your mobile number.</span>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Operator</label>
-                                                                            <select name="bankName" class="form-control form-control-solid form-control-lg">
-                                                                                <option value="Jio">Jio</option>
-                                                                                <option value="Airtel" selected="selected">Airtel</option>
-                                                                                <option value="Vi">Vi</option>
-                                                                                <option value="BSNL">BSNL</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Circle</label>
-                                                                            <select name="bankName" class="form-control form-control-solid form-control-lg">
-                                                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                                                <option value="Telangana" selected="selected">Telangana</option>
-                                                                                <option value="Karnataka">Karnataka</option>
-                                                                                <option value="Delhi">Delhi</option>
-                                                                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Recharge Amount</label>
-                                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="username" placeholder="Recharge Amount" />
-                                                                            <span class="form-text text-muted">Make sure that your plan exist</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!--end::Wizard Step 5-->
-                                                                    <!--begin::Wizard Actions-->
-                                                                    <div class="d-flex justify-content-between border-top mt-5 pt-10">
-                                                                        
-																		
-																	
-                                                                    </div>
-                                                                    <!--end::Wizard Actions-->
-                                                                </form>
-																<form id="razorpay"><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Hix7yK4KhPweFQ" async> </script> </form>
-                                                                <!--end::Wizard Form-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Wizard Body-->
+							<div class="container-fluid">
+								
+                                <div class="row">
+									<div class="col-lg-12">
+										<!--begin::Card-->
+										<div class="card card-custom example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">Create Goal </h3>
+												
+											</div>
+											<!--begin::Form-->
+											<form action="/api/goals/addGoal" method="POST"  class="form" id="kt_form_1">
+												<div class="card-body">
+													
+													<div class="alert alert-custom alert-light-danger d-none" role="alert" id="kt_form_1_msg">
+														<div class="alert-icon">
+															<i class="flaticon2-information"></i>
+														</div>
+														<div class="alert-text font-weight-bold">Oh snap! Change a few things up and try submitting again.</div>
+														<div class="alert-close">
+															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span>
+																	<i class="ki ki-close"></i>
+																</span>
+															</button>
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-form-label text-right col-lg-3 col-sm-12">Goal Name *</label>
+														<div class="col-lg-9 col-md-9 col-sm-12">
+															<input type="text" class="form-control" name="name" placeholder="Enter Goal Name"/>
+															<span class="form-text text-muted">Please enter your Goal Name.</span>
+														</div>
+													</div>
+
+													<div class="form-group row">
+														<label class="col-form-label text-right col-lg-3 col-sm-12">Goal Description</label>
+														<div class="col-lg-9 col-md-9 col-sm-12">
+															<textarea class="form-control" name="description" placeholder="Enter Goal Description" rows="3"></textarea>
+															<span class="form-text text-muted">Please enter your Goal Description.</span>
+														</div>
+													</div>
+													
+													<div class="form-group row">
+														<label class="col-form-label text-right col-lg-3 col-sm-12">Target Amount</label>
+														<div class="col-lg-9 col-md-9 col-sm-12">
+															<div class="input-group">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="flaticon2-browser"></i>
+																	</span>
+																</div>
+																<input type="text" class="form-control" name="targetAmount" placeholder="Enter Target Amount" />
+															</div>
+															<span class="form-text text-muted">Please enter number</span>
+														</div>
+													</div>
+												</div>
+                                                <div class="form-group row">
+                                                    <label class="col-form-label text-right col-lg-3 col-sm-12">Time Period *</label>
+                                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                                        <input type="text" class="form-control" name="timePeriod" placeholder="Enter Time Period" />
+                                                        <span class="form-text text-muted">Please enter your Time Period.</span>
                                                     </div>
-                                                    <!--end::Wizard-->
                                                 </div>
-                                                <!--end::Wizard-->
-                                            </div>
-                                        </div>
-                                        <!--end::Container-->
-                                    </div>
-                                    <!--end::Entry-->
-                                </div>
+												<div class="card-footer">
+													<div class="row">
+														<div class="col-lg-9 ml-lg-auto">
+															<button type="submit" class="btn btn-primary font-weight-bold mr-2" name="submitButton">Submit</button>
+															<button type="reset" class="btn btn-light-primary font-weight-bold">Cancel</button>
+														</div>
+													</div>
+												</div>
+											</form>
+											<!--end::Form-->
+										</div>
+										<!--end::Card-->
+									</div>
+								</div>
 							</div>
 							<!--end::Container-->
 						</div>
@@ -441,7 +425,9 @@
 		<!--end::Page Scripts-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="/assets/js/pages/custom/contacts/list-datatable.js"></script>
-        <script src="/assets/js/pages/custom/wizard/wizard-1.js"></script>
+		<!--end::Page Scripts-->
+        <!--begin::Page Scripts(used by this page)-->
+        <script src="/assets/js/pages/crud/forms/validation/form-controls.js"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

@@ -6,120 +6,43 @@ var KTFormControls = function () {
 			document.getElementById('kt_form_1'),
 			{
 				fields: {
-					email: {
+					name: {
 						validators: {
 							notEmpty: {
-								message: 'Email is required'
-							},
-							emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'Goal name is required'
 							}
 						}
 					},
-
-					url: {
+					timePeriod: {
 						validators: {
 							notEmpty: {
-								message: 'Website URL is required'
-							},
-							uri: {
-								message: 'The website address is not valid'
-							}
-						}
-					},
-
-					digits: {
-						validators: {
-							notEmpty: {
-								message: 'Digits is required'
+								message: 'Time Period is required'
 							},
 							digits: {
-								message: 'The velue is not a valid digits'
+								message: 'The value is not valid '
 							}
 						}
 					},
-
-					creditcard: {
+					targetAmount: {
 						validators: {
 							notEmpty: {
-								message: 'Credit card number is required'
+								message: 'Target Amount is required'
 							},
-							creditCard: {
-								message: 'The credit card number is not valid'
+							digits: {
+								message: 'The value is not valid '
 							}
 						}
 					},
 
-					phone: {
+					description: {
 						validators: {
-							notEmpty: {
-								message: 'US phone number is required'
-							},
-							phone: {
-								country: 'US',
-								message: 'The value is not a valid US phone number'
-							}
-						}
-					},
-
-					option: {
-						validators: {
-							notEmpty: {
-								message: 'Please select an option'
-							}
-						}
-					},
-
-					options: {
-						validators: {
-							choice: {
-								min:2,
-								max:5,
-								message: 'Please select at least 2 and maximum 5 options'
-							}
-						}
-					},
-
-					memo: {
-						validators: {
-							notEmpty: {
-								message: 'Please enter memo text'
-							},
 							stringLength: {
-								min:50,
-								max:100,
-								message: 'Please enter a menu within text length range 50 and 100'
+								min:10,
+								max:250,
+								message: 'Please enter a menu within text length range 10 and 250'
 							}
 						}
-					},
-
-					checkbox: {
-						validators: {
-							choice: {
-								min:1,
-								message: 'Please kindly check this'
-							}
-						}
-					},
-
-					checkboxes: {
-						validators: {
-							choice: {
-								min:2,
-								max:5,
-								message: 'Please check at least 1 and maximum 2 options'
-							}
-						}
-					},
-
-					radios: {
-						validators: {
-							choice: {
-								min:1,
-								message: 'Please kindly check this'
-							}
-						}
-					},
+					}
 				},
 
 				plugins: { //Learn more: https://formvalidation.io/guide/plugins
@@ -248,12 +171,129 @@ var KTFormControls = function () {
 			}
 		);
 	}
+	var _initDemo3 = function () {
+		FormValidation.formValidation(
+			document.getElementById('kt_form_23'),
+			{
+				fields: {
+					name: {
+						validators: {
+							notEmpty: {
+								message: 'Goal name is required'
+							}
+						}
+					},
+					description: {
+						validators: {
+							notEmpty: {
+								message: 'Goal Description is required'
+							}
+						}
+					},
+					targetAmount: {
+						validators: {
+							notEmpty: {
+								message: 'Target Amount is required'
+							},
+							digits: {
+								message: 'Target Amount must be number'
+							}
+						}
+					},
+					timePeriod: {
+						validators: {
+							notEmpty: {
+								message: 'Time Period is required'
+							},
+							digits: {
+								message: 'Time Period must be number'
+							}
+						}
+					}
+				},
+
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Validate fields when clicking the Submit button
+					submitButton: new FormValidation.plugins.SubmitButton(),
+            		// Submit the form when all fields are valid
+            		defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap({
+						eleInvalidClass: '',
+						eleValidClass: '',
+					})
+				}
+			}
+		);
+	}
+	var _initDemo4 = function () {
+		FormValidation.formValidation(
+			document.getElementById('kt_form_5'),
+			{
+				fields: {
+					name: {
+						validators: {
+							notEmpty: {
+								message: 'Goal name is required'
+							}
+						}
+					},
+					timePeriod: {
+						validators: {
+							notEmpty: {
+								message: 'Time Period is required'
+							},
+							digits: {
+								message: 'The value is not valid '
+							}
+						}
+					},
+					targetAmount: {
+						validators: {
+							notEmpty: {
+								message: 'Target Amount is required'
+							},
+							digits: {
+								message: 'The value is not valid '
+							}
+						}
+					},
+
+					description: {
+						validators: {
+							stringLength: {
+								min:10,
+								max:250,
+								message: 'Please enter a menu within text length range 10 and 250'
+							}
+						}
+					}
+				},
+
+				plugins: {
+					trigger: new FormValidation.plugins.Trigger(),
+					// Validate fields when clicking the Submit button
+					submitButton: new FormValidation.plugins.SubmitButton(),
+            		// Submit the form when all fields are valid
+            		defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+					// Bootstrap Framework Integration
+					bootstrap: new FormValidation.plugins.Bootstrap({
+						eleInvalidClass: '',
+						eleValidClass: '',
+					})
+				}
+			}
+		);
+	}
 
 	return {
 		// public functions
 		init: function() {
 			_initDemo1();
 			_initDemo2();
+			_initDemo3();
+			_initDemo4();
 		}
 	};
 }();
