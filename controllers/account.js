@@ -1,3 +1,4 @@
+import moment from 'moment';
 import responder from '../utils/responseHandler.js';
 import userService from '../services/user.js';
 import ValidationError from '../utils/errors/validationError.js';
@@ -66,8 +67,18 @@ const getAccountDetails = async (req, res, next) => {
     if (accountDetails !== undefined) {
       exist = true;
     }
+    const modifiedTransactions = transactions;
+    modifiedTransactions.forEach((ele) => {
+      ele.date = moment(ele.date).format('D MMM, YY');
+      if (ele.amount < 0) {
+        ele.status = 'Debit';
+        ele.amount *= (-1);
+      } else {
+        ele.status = 'Credit';
+      }
+    });
     res.render('accounts', {
-      account: accountDetails, transDetails: transactions, user, exist
+      account: accountDetails, transDetails: modifiedTransactions, user, exist
     });
   } catch (ex) {
     return next(ex);
@@ -78,7 +89,17 @@ const getTransactions = async (req, res, next) => {
   try {
     const { user } = req;
     const transactions = await accountDb.getAllTransactions({ email: user.email });
-    return responder(res)(null, transactions);
+    const modifiedTransactions = transactions;
+    modifiedTransactions.forEach((ele) => {
+      ele.date = moment(ele.date).format('D MMM, YY');
+      if (ele.amount < 0) {
+        ele.status = 'Debit';
+        ele.amount *= (-1);
+      } else {
+        ele.status = 'Credit';
+      }
+    });
+    return responder(res)(null, { transactions: modifiedTransactions });
   } catch (ex) {
     return next(ex);
   }

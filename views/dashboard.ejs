@@ -223,118 +223,7 @@
 								
 								<!--begin::Row-->
 								<div class="row">
-									<div class="col-xl-5">
-										<!--begin::List Widget 4-->
-										<div class="card card-custom card-stretch gutter-b">
-											<!--begin::Header-->
-											<div class="card-header border-0">
-												<h3 class="card-title font-weight-bolder text-dark">Latest Transactions</h3>
-												
-											</div>
-											<!--end::Header-->
-											<!--begin::Body-->
-											<div class="card-body pt-2">
-												<!--begin::Item-->
-												<div class="d-flex align-items-center">
-													<!--begin::Bullet-->
-													<span class="bullet bullet-bar bg-success align-self-stretch"></span>
-													<!--end::Bullet-->
-													<!--begin::Checkbox-->
-													<label class="checkbox checkbox-lg checkbox-light-success checkbox-inline flex-shrink-0 m-0 mx-4">
-														
-														<span></span>
-													</label>
-													<!--end::Checkbox-->
-													<!--begin::Text-->
-													<div class="d-flex flex-column flex-grow-1">
-														<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg mb-1">Create FireStone Logo</a>
-														<span class="text-muted font-weight-bold">Due in 2 Days</span>
-													</div>
-													<!--end::Text-->
-												</div>
-												<!--end:Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mt-10">
-													<!--begin::Bullet-->
-													<span class="bullet bullet-bar bg-primary align-self-stretch"></span>
-													<!--end::Bullet-->
-													<!--begin::Checkbox-->
-													<label class="checkbox checkbox-lg checkbox-light-primary checkbox-inline flex-shrink-0 m-0 mx-4">
-														<input type="checkbox" value="1" />
-														<span></span>
-													</label>
-													<!--end::Checkbox-->
-													<!--begin::Text-->
-													<div class="d-flex flex-column flex-grow-1">
-														<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg mb-1">Stakeholder Meeting</a>
-														<span class="text-muted font-weight-bold">Due in 3 Days</span>
-													</div>
-													<!--end::Text-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mt-10">
-													<!--begin::Bullet-->
-													<span class="bullet bullet-bar bg-warning align-self-stretch"></span>
-													<!--end::Bullet-->
-													<!--begin::Checkbox-->
-													<label class="checkbox checkbox-lg checkbox-light-warning checkbox-inline flex-shrink-0 m-0 mx-4">
-														<input type="checkbox" value="1" />
-														<span></span>
-													</label>
-													<!--end::Checkbox-->
-													<!--begin::Text-->
-													<div class="d-flex flex-column flex-grow-1">
-														<a href="#" class="text-dark-75 text-hover-primary font-size-sm font-weight-bold font-size-lg mb-1">Scoping &amp; Estimations</a>
-														<span class="text-muted font-weight-bold">Due in 5 Days</span>
-													</div>
-													<!--end::Text-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mt-10">
-													<!--begin::Bullet-->
-													<span class="bullet bullet-bar bg-info align-self-stretch"></span>
-													<!--end::Bullet-->
-													<!--begin::Checkbox-->
-													<label class="checkbox checkbox-lg checkbox-light-info checkbox-inline flex-shrink-0 m-0 mx-4">
-														<input type="checkbox" value="1" />
-														<span></span>
-													</label>
-													<!--end::Checkbox-->
-													<!--begin::Text-->
-													<div class="d-flex flex-column flex-grow-1">
-														<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg mb-1">Sprint Showcase</a>
-														<span class="text-muted font-weight-bold">Due in 1 Day</span>
-													</div>
-													<!--end::Text-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mt-10">
-													<!--begin::Bullet-->
-													<span class="bullet bullet-bar bg-danger align-self-stretch"></span>
-													<!--end::Bullet-->
-													<!--begin::Checkbox-->
-													<label class="checkbox checkbox-lg checkbox-light-danger checkbox-inline flex-shrink-0 m-0 mx-4">
-														<input type="checkbox" value="1" />
-														<span></span>
-													</label>
-													<!--end::Checkbox:-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column flex-grow-1">
-														<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg mb-1">Project Retro</a>
-														<span class="text-muted font-weight-bold">Due in 12 Days</span>
-													</div>
-													<!--end::Text-->
-												</div>
-												<!--end::Item-->
-											</div>
-											<!--end::Body-->
-										</div>
-										<!--end:List Widget 4-->
-									</div>
-									<div class="col-xl-7">
+									<div class="col-xl-6">
 										<!--begin::Card-->
 										<div class="card card-custom gutter-b">
 											<div class="card-header">
@@ -353,6 +242,64 @@
 										</div>
 										<!--end::Card-->
 									</div>
+									<div class="col-xl-6">
+										<!--begin::List Widget 19-->
+										<div class="card card-custom card-stretch gutter-b">
+											<!--begin::Header-->
+											<div class="card-header border-0 pt-6 mb-2">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label font-weight-bold font-size-h4 text-dark-75 mb-3">Latest Transactions</span>
+													
+												</h3>
+												<div class="card-toolbar">
+													<a href="/api/account/home" class="btn btn-light-info btn-sm font-weight-bolder font-size-sm py-3 px-6">View More</a>
+												</div>
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body pt-2">
+												<!--begin::Table-->
+												<% if(isThere > 0){ %>
+												<div class="table-responsive">
+													<table class="table table-borderless mb-0">
+														<tbody>
+															<!--begin::Item-->
+															<% transactions.forEach((ele) => { %>
+															<tr>
+																
+																<td class="font-size-lg font-weight-bolder text-dark-75 align-middle w-150px pb-6"><%= ele.details %></td>
+																<td class="font-weight-bold text-muted text-right align-middle pb-6"><%= ele.amount %></td>
+																<!-- <td class="font-weight-bolder font-size-lg text-dark-75 text-right align-middle pb-6"><%= ele.status %></td> -->
+																<% if(ele.status === "Credit"){ %> 
+																	<td class="text-dark-75 text-right align-middle pb-6">
+																		<span class="label label-lg label-light-success label-inline">Credit</span>
+																	</td>
+																<% }else{ %>
+																	<td class="text-dark-75 text-right align-middle pb-6">
+																		<span class="label label-lg label-light-danger label-inline">Debit</span>
+																	</td>
+																<% } %>
+															</tr>
+															<!--end::Item-->
+															<% }) %>
+														</tbody>
+													</table>
+												</div>
+												<% } else { %>
+													<div class="flex-grow-1 bg-danger p-8 rounded-xl flex-grow-1 bgi-no-repeat" style="background-position: calc(100% + 0.5rem) bottom; background-size: auto 70%; background-image: url(/assets/media/svg/humans/custom-3.svg)">
+														<h4 class="text-inverse-danger mt-2 font-weight-bolder">Account Not Linked</h4>
+														<p class="text-inverse-danger my-6">No Transactions &amp; to show
+														<br />through product confidence.</p>
+														<a href="#" class="btn btn-warning font-weight-bold py-2 px-6">Link Account</a>
+													</div>
+												<% } %>
+												<!--end::Table-->
+											</div>
+											<!--end::Body-->
+										</div>
+										<!--end::List Widget 19-->
+									</div>
+									
 								</div>
 								<!--end::Row-->
 								<!--end::Dashboard-->
