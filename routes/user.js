@@ -24,6 +24,6 @@ router.post('/validateToken', userController.isTokenValid);
 router.post('/logout', userController.logout);
 
 router.use(utils.verifyAuthToken);
-// all other routes to be added below 
+// all other routes to be added below
 
 export default router;

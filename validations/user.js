@@ -3,19 +3,12 @@ import Joi from '@hapi/joi';
 import ValidationError from '../utils/errors/validationError.js';
 import InputParamError from '../utils/errors/inputParamError.js';
 import httpErrors from '../utils/errors/constants.js';
-import utils from '../utils/utils.js';
 
 const {
-  PASSWORDS_BASE64_CORRUPTED,
   LOGIN_VALIDATION_ERROR,
   SIGNUP_VALIDATION_ERROR,
-  // CHECKUSER_VALIDATION_ERROR,
-  // UPDATEUSER_VALIDATION_ERROR,
   PASSWORDS_NO_MATCH_ERROR
-  // VALIDATION_ERROR
 } = httpErrors;
-
-const base64 = Joi.string().base64();
 
 // eslint-disable-next-line max-len
 const emailRegex = /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
@@ -74,23 +67,21 @@ const signUpSchema = Joi.object({
   dob: Joi.number().required().min(18).message('age should be greater than or equal to 18')
 });
 
-const base64PwdSignup = async ({ body }, res, next) => {
+const pwdSignup = async ({ body }, res, next) => {
   try {
     if (body.password !== body.confirmPassword) {
       return next(new ValidationError('Passwords Do Not Match', PASSWORDS_NO_MATCH_ERROR));
     }
-    await base64.validateAsync(body.password || '');
-    await base64.validateAsync(body.confirmPassword || '');
     return next();
   } catch (err) {
-    return next(new ValidationError(err.details, PASSWORDS_BASE64_CORRUPTED));
+    return next(new ValidationError(err.details));
   }
 };
 
 const signUpValidate = ({ body }, res, next) => signUpSchema.validateAsync({
   ...body,
-  password: utils.base64toString(body.password),
-  confirmPassword: utils.base64toString(body.confirmPassword),
+  password: body.password,
+  confirmPassword: body.confirmPassword,
   dob: getAge(body.dob)
 })
   .then(() => next())
@@ -98,13 +89,13 @@ const signUpValidate = ({ body }, res, next) => signUpSchema.validateAsync({
 
 const loginValidate = ({ body }, res, next) => logInSchema.validateAsync({
   ...body,
-  password: utils.base64toString(body.password)
+  password: body.password
 })
   .then(() => next())
   .catch((err) => next(new ValidationError(err.details[0].message, LOGIN_VALIDATION_ERROR)));
 
 export default {
   signUpValidate,
-  base64PwdSignup,
+  pwdSignup,
   loginValidate
 };

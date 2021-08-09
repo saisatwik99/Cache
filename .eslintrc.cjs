@@ -1,12 +1,16 @@
 module.exports = {
   parser: '@babel/eslint-parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    requireConfigFile: false
+  },
+  plugins: [
+    '@babel'
+  ],
   extends: [
     'airbnb-base'
   ],
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module'
-  },
   rules: {
     'max-len': ['error', { code: 120 }],
     indent: ['error', 2],
