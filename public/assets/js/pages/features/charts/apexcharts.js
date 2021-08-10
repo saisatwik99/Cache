@@ -1006,7 +1006,7 @@ var KTApexChartsDemo = function () {
 							label: 'Total',
 							formatter: function (w) {
 								// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-								return 89
+								return 54
 							}
 						}
 					}
