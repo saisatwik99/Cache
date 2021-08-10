@@ -1006,13 +1006,13 @@ var KTApexChartsDemo = function () {
 							label: 'Total',
 							formatter: function (w) {
 								// By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-								return 249
+								return 89
 							}
 						}
 					}
 				}
 			},
-			labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
+			labels: ['House', 'Trip', 'Iphone', 'Car'],
 			colors: [primary, success, warning, danger]
 		};
 
