@@ -22,25 +22,38 @@ const userSignUp = async ({
     salt
   };
 
-  const { insertedId } = await userDB.addUser(user);
-  const userId = insertedId.toString();
-  if (!insertedId) {
-    throw new InternalServerError('ID of User Not Found');
-  }
+  // const { insertedId } = await userDB.addUser(user);
+  // const userId = insertedId.toString();
+  // if (!insertedId) {
+  //   throw new InternalServerError('ID of User Not Found');
+  // }
 
-  return utils.getToken(userId);
+  // return utils.getToken(userId);
+  const info = await userDB.addUser(user);
+  if (info.error === undefined) {
+    const userId = info.insertedId.toString();
+    if (!info.insertedId) {
+      return { error: 'ID of User Not Found', token: null };
+    }
+
+    return { error: null, token: utils.getToken(userId) };
+  }
+  return { error: info.error, token: null };
 };
 
 const userLogin = async ({ email, password: inputPassword }) => {
   const user = await userDB.getUserDetails({ email });
   if (!user) {
-    throw new NotFoundError('User Not Found');
+    return { error: 'User Not Found', token: null };
+    // throw new NotFoundError('User Not Found');
   }
   if (!hasher.verify(utils.base64toString(inputPassword), user.password, user.salt)) {
-    throw new AuthError();
+    return { error: 'Incorrect Password', token: null };
+    // throw new AuthError();
   }
 
-  return utils.getToken(user._id);
+  return { error: null, token: utils.getToken(user._id) };
+  // return utils.getToken(user._id)
 };
 
 export default {

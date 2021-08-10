@@ -20,7 +20,8 @@ const getUserDetails = ({ email = '', userId = '' }) => {
 const addUser = async (user) => {
   const isUserPresent = await usersCollectionRef().findOne({ email: user.email });
   if (isUserPresent) {
-    throw new ConflictError('User Already Present');
+    // throw new ConflictError('User Already Present');
+    return { error: 'User Already Present' };
   }
   return usersCollectionRef().insertOne(user);
 };

@@ -8,7 +8,7 @@ import InvalidJwtError from '../utils/errors/invalidToken.js';
 import userDB from '../db/user.js';
 import accountDb from '../db/account.js';
 
-const getSignup = (req, res) => res.render('signup');
+const getSignup = (req, res) => res.render('signup', { error: null, errorExist: false });
 
 const userSignUp = async (req, res, next) => {
   try {
@@ -19,21 +19,24 @@ const userSignUp = async (req, res, next) => {
     } = req;
     console.log(req.body);
     if (password !== confirmPassword) {
-      return next(new ValidationError(httpErrors.SIGNUP_VALIDATION_ERROR));
+      // return next(new ValidationError(httpErrors.SIGNUP_VALIDATION_ERROR));
+      return res.render('signup', { error: 'Passwords Do Not Match', errorExist: true });
     }
-    const token = await userService.userSignUp({
+    const info = await userService.userSignUp({
       firstName, lastName, email, password, dob
     });
-    req.session.authtoken = token;
-    return res.redirect('/api/user/dashboard');
+    if (info.token !== null) {
+      req.session.authtoken = info.token;
+      return res.redirect('/api/user/dashboard');
+    }
+    return res.render('signup', { error: info.error, errorExist: true });
   } catch (ex) {
     return next(ex);
   }
 };
 
 const getLogin = (req, res) => {
-  console.log('Why I am here');
-  res.render('login');
+  res.render('login', { error: null, errorExist: false });
 };
 
 const userLogin = async (req, res, next) => {
@@ -43,10 +46,14 @@ const userLogin = async (req, res, next) => {
         email, password
       }
     } = req;
-    const token = await userService.userLogin({ email, password });
-    req.session.authtoken = token;
-    console.log(token);
-    res.redirect('/api/user/dashboard');
+    const info = await userService.userLogin({ email, password });
+    console.log(info);
+    if (info.token !== null) {
+      req.session.authtoken = info.token;
+      res.redirect('/api/user/dashboard');
+    } else {
+      res.render('login', { error: info.error, errorExist: true });
+    }
   } catch (ex) {
     return next(ex);
   }
@@ -56,8 +63,8 @@ const dashboard = async (req, res) => {
   const { user } = req;
   const userDetails = await userDB.getUserDetails({ email: user.email });
   const transactions = await accountDb.getAllTransactions({ email: user.email });
-  var modifiedTransactions = transactions;
-  if(transactions.length > 0) {
+  let modifiedTransactions = transactions;
+  if (transactions.length > 0) {
     modifiedTransactions.forEach((ele) => {
       ele.date = moment(ele.date).format('D MMM, YY');
       if (ele.amount < 0) {
@@ -69,7 +76,7 @@ const dashboard = async (req, res) => {
     });
     modifiedTransactions = modifiedTransactions.slice(0, 5);
   }
-  
+
   const isThere = transactions.length > 0;
   res.render('dashboard', { user: userDetails, transactions: modifiedTransactions, isThere });
 };

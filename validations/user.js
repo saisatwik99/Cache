@@ -29,7 +29,6 @@ const password = (passField = 'password') => Joi.string()
   });
 
 const getAge = (birthDateString) => {
-  console.log(birthDateString);
   if (!birthDateString) {
     throw new InputParamError('Date of Birth Not Found');
   }
@@ -70,11 +69,13 @@ const signUpSchema = Joi.object({
 const pwdSignup = async ({ body }, res, next) => {
   try {
     if (body.password !== body.confirmPassword) {
-      return next(new ValidationError('Passwords Do Not Match', PASSWORDS_NO_MATCH_ERROR));
+      // return next(new ValidationError('Passwords Do Not Match', PASSWORDS_NO_MATCH_ERROR));
+      return res.render('signup', { error: 'Passwords Do Not Match', errorExist: true });
     }
     return next();
   } catch (err) {
-    return next(new ValidationError(err.details));
+    // return next(new ValidationError(err.details));
+    return res.render('signup', { error: 'Something went wrong', errorExist: true });
   }
 };
 
@@ -85,15 +86,16 @@ const signUpValidate = ({ body }, res, next) => signUpSchema.validateAsync({
   dob: getAge(body.dob)
 })
   .then(() => next())
-  .catch((err) => next(new ValidationError(err.details, SIGNUP_VALIDATION_ERROR)));
+  .catch((err) => res.render('signup', { error: err.details[0].message, errorExist: true }));
+  // .catch((err) => next(new ValidationError(err.details, SIGNUP_VALIDATION_ERROR)));
 
 const loginValidate = ({ body }, res, next) => logInSchema.validateAsync({
   ...body,
   password: body.password
 })
   .then(() => next())
-  .catch((err) => next(new ValidationError(err.details[0].message, LOGIN_VALIDATION_ERROR)));
-
+  .catch((err) => res.render('login', { error: err.details[0].message, errorExist: true }));
+// next(new ValidationError(err.details[0].message, LOGIN_VALIDATION_ERROR))
 export default {
   signUpValidate,
   pwdSignup,

@@ -12,7 +12,7 @@ const {
 const router = Router();
 
 router.get('/signup', userController.getSignup);
-router.post('/signUp',  signUpValidate, userController.userSignUp);
+router.post('/signUp', signUpValidate, userController.userSignUp);
 router.get('/login', userController.getLogin);
 router.post('/login', loginValidate, userController.userLogin);
 router.get('/dashboard', utils.verifyAuthToken, userController.dashboard);
