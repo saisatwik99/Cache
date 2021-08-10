@@ -9,7 +9,7 @@ import userDb from '../db/user.js';
 import accountDb from '../db/account.js';
 
 const bankLogos = {
-  'State Bank of India': 'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628488080/Bank%20Logos/sbi_ipkoqe.png',
+  'State Bank of India': 'https://res.cloudinary.com/dpyeb9ref/image/upload/c_scale,h_512,w_512/v1628488080/Bank%20Logos/sbi_ipkoqe.png',
   'HDFC Bank': 'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628488080/Bank%20Logos/hdfc_o83sph.png',
   'Kotak Mahindra': 'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628488081/Bank%20Logos/209_s7kpfu.png',
   'Axis Bank': 'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628488081/Bank%20Logos/axis_cdqlds.png',

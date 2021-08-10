@@ -226,7 +226,7 @@
 						<!--begin::Entry-->
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
-							<% if(halfLen > 0){ %>
+							<% if(halfLen > 0 || isOdd === 1){ %>
 							<div class="container-fluid">
 								<% if(isGreater){ %>
 								<% for(var i=0; i<halfLen; i=i+2){ %>
@@ -241,7 +241,7 @@
 												<div class="d-flex align-items-center">
 													<!--begin::Pic-->
 													<div class="flex-shrink-0 mr-4 symbol symbol-65 symbol-circle">
-														<img src="/assets/media/project-logos/3.png" alt="image" />
+														<img src=<%= modifiedGoals[i].goalImage %> alt="image" />
 													</div>
 													<!--end::Pic-->
 													<!--begin::Info-->
@@ -358,7 +358,7 @@
 												<div class="d-flex align-items-center">
 													<!--begin::Pic-->
 													<div class="flex-shrink-0 mr-4 symbol symbol-65 symbol-circle">
-														<img src="/assets/media/project-logos/3.png" alt="image" />
+														<img src=<%= modifiedGoals[i+1].goalImage %> alt="image" />
 													</div>
 													<!--end::Pic-->
 													<!--begin::Info-->
@@ -483,7 +483,7 @@
 												<div class="d-flex align-items-center">
 													<!--begin::Pic-->
 													<div class="flex-shrink-0 mr-4 symbol symbol-65 symbol-circle">
-														<img src="/assets/media/project-logos/3.png" alt="image" />
+														<img src=<%= lastGoal.goalImage %> alt="image" />
 													</div>
 													<!--end::Pic-->
 													<!--begin::Info-->

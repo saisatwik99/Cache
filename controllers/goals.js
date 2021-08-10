@@ -5,6 +5,27 @@ import goalService from '../services/goal.js';
 import goalUtils from '../utils/goal.js';
 import goalDb from '../db/goals.js';
 
+const goalImages = [
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600107/Goals/img-16_j7qqww.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600107/Goals/img-17_nvkvze.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600107/Goals/img-18_p0n9ly.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600107/Goals/img-13_ifuduf.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600107/Goals/img-14_umkgwy.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600107/Goals/img-15_j2wag4.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600106/Goals/img-10_bh0mtm.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600106/Goals/img-7_jqoydk.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600106/Goals/img-12_tfc1fz.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600106/Goals/img-8_f16mjh.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600106/Goals/img-11_s4wzpm.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600106/Goals/img-9_ogacsd.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600105/Goals/img-1_ij418d.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600105/Goals/img-2_xeyugi.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600105/Goals/img-3_kdpgmi.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600105/Goals/img-4_pmytrp.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600105/Goals/img-6_zvjdwm.jpg',
+  'https://res.cloudinary.com/dpyeb9ref/image/upload/v1628600105/Goals/img-6_zvjdwm.jpg'
+];
+
 const addGoal = async (req, res, next) => {
   try {
     const {
@@ -12,11 +33,10 @@ const addGoal = async (req, res, next) => {
     } = req.body;
     const { user } = req;
     const payments = [];
-
+    console.log(req.body);
     const currDate = new Date();
     const end = new Date();
     end.setMonth(end.getMonth() + timePeriod);
-
     const goal = {
       targetAmount,
       name,
@@ -26,7 +46,8 @@ const addGoal = async (req, res, next) => {
       timePeriod,
       payments,
       startDate: currDate,
-      endDate: end
+      endDate: end,
+      goalImage: goalImages[Math.floor(Math.random() * 18)]
     };
     await goalService.addGoal(goal);
 
@@ -89,7 +110,8 @@ const getAllGoals = async (req, res) => {
       saved: investedAmount.toFixed(2),
       yetToSave: goal.targetAmount - investedAmount,
       progressBar: `width-${progressBar}`,
-      progress: Math.floor((investedAmount * 100) / goal.targetAmount)
+      progress: Math.floor((investedAmount * 100) / goal.targetAmount),
+      goalImage: goal.goalImage
     };
   }));
   let isGreater = 0;
@@ -126,7 +148,8 @@ const getDetails = async (req, res) => {
     noTrans: goalDetails.payments.length,
     payments: goalDetails.payments.reverse(),
     progressBar: `width-${progressBar}`,
-    progress: Math.floor((investedAmount * 100) / goalDetails.targetAmount)
+    progress: Math.floor((investedAmount * 100) / goalDetails.targetAmount),
+    goalImage: goalDetails.goalImage
   };
   res.render('goalDetails', { goal });
 };
