@@ -17,7 +17,6 @@ const userSignUp = async (req, res, next) => {
         firstName, lastName, email, password, dob, confirmPassword
       }
     } = req;
-    console.log(req.body);
     if (password !== confirmPassword) {
       // return next(new ValidationError(httpErrors.SIGNUP_VALIDATION_ERROR));
       return res.render('signup', { error: 'Passwords Do Not Match', errorExist: true });
@@ -47,7 +46,6 @@ const userLogin = async (req, res, next) => {
       }
     } = req;
     const info = await userService.userLogin({ email, password });
-    console.log(info);
     if (info.token !== null) {
       req.session.authtoken = info.token;
       res.redirect('/api/user/dashboard');

@@ -33,10 +33,9 @@ const addGoal = async (req, res, next) => {
     } = req.body;
     const { user } = req;
     const payments = [];
-    console.log(req.body);
     const currDate = new Date();
     const end = new Date();
-    end.setMonth(end.getMonth() + timePeriod);
+    end.setMonth(end.getMonth() + +timePeriod);
     const goal = {
       targetAmount,
       name,
@@ -122,10 +121,8 @@ const getAllGoals = async (req, res) => {
     lastGoal = modifiedGoals[modifiedGoals.length - 1];
   }
   let halfLen = modifiedGoals.length;
-  if (modifiedGoals.length % 2 != 0) halfLen = modifiedGoals.length - 1;
-  console.log({
-    modifiedGoals, isOdd, lastGoal, isGreater, halfLen
-  });
+  if (modifiedGoals.length % 2 !== 0) halfLen = modifiedGoals.length - 1;
+
   res.render('goalHome', {
     modifiedGoals, isOdd, lastGoal, isGreater, halfLen
   });
@@ -163,7 +160,6 @@ const payGoalPost = async (req, res) => {
   const { goalId } = req.params;
   const { amount, paymentDetails } = req.body;
   const goalDetails = await goalDb.findGoal(goalId);
-  console.log(goalDetails);
   const navValue = await goalUtils.getNavValue();
   const navAlloted = amount / navValue;
   goalDetails.payments.push({
