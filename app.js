@@ -36,6 +36,14 @@ app.use(
 
 app.use(morgan('dev'));
 app.use('/api', routes);
+app.use('/faq', (req, res) => {
+  res.render('faq');
+});
+app.use('/', (req, res) => {
+  res.render('mainPage');
+});
+
+
 
 app.use(errorHandler);
 
