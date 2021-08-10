@@ -65,8 +65,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="index.html">
-                                <img src="/Main-Page/assets/images/cache.jpeg" alt="Logo">
+                            <a href="index.html">
+                                <img src="/Main-Page/assets/images/cache_white_border.png" width="80" height="40" alt="Logo">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -326,7 +326,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-8">
                         <div class="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
                             <a class="logo" href="#">
-                                <img src="/Main-Page/assets/images/cache.jpeg" alt="logo">
+                                <img src="/Main-Page/assets/images/cacheLogo.png" width="70" height="55" alt="Logo">
                             </a>
                             
                         </div> <!-- footer about -->
@@ -392,7 +392,18 @@
     <script src="/Main-Page/assets/js/waypoints.min.js"></script>
     <script src="/Main-Page/assets/js/jquery.counterup.min.js"></script>
     
-
+    <script type="text/javascript"> 
+        $(window).on('scroll', function (event) {
+            var scroll = $(window).scrollTop();
+            if (scroll < 20) {
+                $(".navbar-area").removeClass("sticky");
+                $(".navbar .navbar-brand img").attr("src", "/Main-Page/assets/images/cacheLogo-2.png");
+            } else {
+                $(".navbar-area").addClass("sticky");
+                $(".navbar .navbar-brand img").attr("src", "/Main-Page/assets/images/cacheLogo.png");
+            }
+        });   
+    </script>
     
     <!--====== Scrolling Nav js ======-->
     <script src="/Main-Page/assets/js/jquery.easing.min.js"></script>
