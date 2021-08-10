@@ -36,7 +36,7 @@ const addGoal = async (req, res, next) => {
     console.log(req.body);
     const currDate = new Date();
     const end = new Date();
-    end.setMonth(end.getMonth() + timePeriod);
+    end.setMonth(end.getMonth() ++ timePeriod);
     const goal = {
       targetAmount,
       name,
