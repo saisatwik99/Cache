@@ -10,5 +10,6 @@ router.get('/linkAccount', utils.verifyAuthToken, accountController.getLinkAccou
 router.get('/home', utils.verifyAuthToken, accountController.getAccountDetails);
 router.get('/getTransactions', utils.verifyAuthToken, accountController.getTransactions);
 router.post('/sync', utils.verifyAuthToken, accountController.sync);
+router.post('/unlinkAccount', utils.verifyAuthToken, accountController.unlinkAccount);
 
 export default router;

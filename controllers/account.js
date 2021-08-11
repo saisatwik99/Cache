@@ -128,10 +128,18 @@ const sync = async (req, res, next) => {
   }
 };
 
+const unlinkAccount = async (req, res, next) => {
+  const { user } = req;
+  await accountDb.deleteAccount(user.email);
+  await accountDb.deleteTransactions(user.email);
+  res.redirect('/api/account/home');
+}
+
 export default {
   linkAccount,
   getAccountDetails,
   getTransactions,
   sync,
-  getLinkAccount
+  getLinkAccount,
+  unlinkAccount
 };
