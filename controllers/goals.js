@@ -217,12 +217,11 @@ const deleteGoal = async (req, res) => {
   const { goalId } = req.params;
   const goalDetails = await goalDb.findGoal(goalId);
   const navValue = await goalUtils.getNavValue();
-  console.log(goalDetails.totalNav);
   if (goalDetails.totalNav === 0) {
     await goalDb.deleteGoal(goalId);
     return res.redirect('/api/goals/getAllGoals');
   }
-  res.render('deleteGoal', { goalId, totalAmount: navValue * goalDetails.totalNav });
+  res.render('deleteGoal', { goalId, totalAmount: (navValue * goalDetails.totalNav) });
 };
 
 const deleteGoalPost = async (req, res) => {

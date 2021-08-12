@@ -232,40 +232,20 @@ var KTFormControls = function () {
 			document.getElementById('kt_form_5'),
 			{
 				fields: {
-					name: {
+					amount: {
 						validators: {
 							notEmpty: {
-								message: 'Goal name is required'
+								message: 'Amount is required'
+							},
+							digits: {
+								message: 'The value is not valid '
 							}
 						}
 					},
-					timePeriod: {
+					paymentDetails: {
 						validators: {
 							notEmpty: {
 								message: 'Time Period is required'
-							},
-							digits: {
-								message: 'The value is not valid '
-							}
-						}
-					},
-					targetAmount: {
-						validators: {
-							notEmpty: {
-								message: 'Target Amount is required'
-							},
-							digits: {
-								message: 'The value is not valid '
-							}
-						}
-					},
-
-					description: {
-						validators: {
-							stringLength: {
-								min:10,
-								max:250,
-								message: 'Please enter a menu within text length range 10 and 250'
 							}
 						}
 					}
