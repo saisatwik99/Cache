@@ -107,7 +107,7 @@ const getAllGoals = async (req, res) => {
       endDate: moment(goal.endDate).format('D MMM, YY'),
       budget: goal.targetAmount,
       saved: investedAmount.toFixed(2),
-      yetToSave: goal.targetAmount - investedAmount,
+      yetToSave: (goal.targetAmount - investedAmount).toFixed(2),
       progressBar: `width-${progressBar}`,
       progress: Math.floor((investedAmount * 100) / goal.targetAmount),
       goalImage: goal.goalImage
@@ -141,7 +141,7 @@ const getDetails = async (req, res) => {
     endDate: moment(goalDetails.endDate).format('D MMM, YY'),
     budget: goalDetails.targetAmount,
     saved: investedAmount.toFixed(2),
-    yetToSave: goalDetails.targetAmount - investedAmount,
+    yetToSave: (goalDetails.targetAmount - investedAmount).toFixed(2),
     noTrans: goalDetails.payments.length,
     payments: goalDetails.payments.reverse(),
     progressBar: `width-${progressBar}`,
