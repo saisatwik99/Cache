@@ -9,6 +9,11 @@ Cache, is a application designed for Indian parents and youth who want to secure
 **Prerequisites:** Node.js, MongoDBl, A beautiful IDE
 
 * Create a .env file ( with PORT, MONGODB_URL, NODE_ENV='staging' and SECRET_KEY) <br>
+* In app.js place your MongoDB URL
+```
+    uri: "<Replace with your MONGODB URL>",
+    collection: 'sessions'
+```
 * Run ```npm install```
 * If everything is working fine, You will get a confirmation message that your application is running.
 
