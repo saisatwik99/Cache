@@ -15,7 +15,7 @@ const MongoDBStore = mongoDBStore(session);
 dotenv.config();
 
 const store = new MongoDBStore({
-  uri: "mongodb://saisatwik:saisatwik@first-shard-00-00.fitvi.mongodb.net:27017,first-shard-00-01.fitvi.mongodb.net:27017,first-shard-00-02.fitvi.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=First-shard-0&authSource=admin&retryWrites=true&w=majority",
+  uri: "mongodb://cache:Cache%4001@cache-shard-00-00.pljbw.mongodb.net:27017,cache-shard-00-01.pljbw.mongodb.net:27017,cache-shard-00-02.pljbw.mongodb.net:27017/?ssl=true&replicaSet=atlas-imosgz-shard-0&authSource=admin&retryWrites=true&w=majority",
   collection: 'sessions'
 });
 
